@@ -45,7 +45,7 @@
 		},
 		watch:{
 			select:function(){
-				console.log(this.select)
+				//console.log(this.select)
 				return this.blogs.filter((value)=>{
 					return value.type.match(this.select)
 					})

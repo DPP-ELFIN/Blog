@@ -4,7 +4,7 @@ import Home from '../components/Home.vue'
 import showBlog from '../components/ShowBlog.vue'
 import writeBlog from '../components/WriteBlog.vue'
 import blogDetails from '../components/blogDetails.vue'
-
+import alterBlog from '../components/alterBlog.vue'
 
 Vue.use(VueRouter)
 
@@ -24,6 +24,10 @@ const routes = [{
 		{
 			path: '/blogDetails/:id',
 			component: blogDetails
+		},
+		{
+			path: '/alterBlog/:id',
+			component: alterBlog
 		},]
 	},
 

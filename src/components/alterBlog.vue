@@ -26,7 +26,9 @@
 					title: '',
 					type:'',
 					content: ''
-				}
+				},
+				blogId:this.$route.params.id,
+				blogs:JSON.parse(window.localStorage.getItem('blogs'))
 			}
 		},
 		watch:{
@@ -42,6 +44,11 @@
 			// 创建编辑器
 			editor.create()
 			this.editor = editor
+			//挂载数据
+			this.blog = this.blogs[this.blogId]
+			this.blog.type === '技术'?this.radio = '3':this.blog.type === '日常'?this.radio = 6:this.radio = 9
+			 editor.txt.html('<p>'+ this.blog.content +'</p>')
+			console.log(this.blog)
 		},
 		methods: {
 			//返回
@@ -50,16 +57,19 @@
 			},
 			//提交
 			submit() {
-				this.blog.content = this.editor.txt.text() //获取文本编辑器的数据			
-				var blogs = JSON.parse(window.localStorage.getItem('blogs'))
-				//var blog = window.localStorage.getItem('blog')
-				if (this.blog.title === '' || this.blog.content === '') return this.$router.go(-1);				
-				blogs.unshift(this.blog)
-				window.localStorage.setItem('blogs', JSON.stringify(blogs))
-				//console.log(blogs)
-				this.$router.go(-1)
+				//let blogs = JSON.parse(window.localStorage.getItem('blogs'))
+				this.blog.content = this.editor.txt.text()
+				this.blogs.splice(this.blogId,1)
+				this.blogs.unshift(this.blog)
+				window.localStorage.setItem('blogs',JSON.stringify(this.blogs))
+				console.log(this.blogs)
+				this.$router.push('/')
+				//console.log(this.blog)
+				//console.log(this.editor.txt.text())
+				
 			}
 		},
+		
 		beforeDestroy() {
 			// 调用销毁 API 对当前编辑器实例进行销毁
 			this.editor.destroy()

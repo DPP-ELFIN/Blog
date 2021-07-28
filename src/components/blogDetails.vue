@@ -4,6 +4,7 @@
 		<p>{{blog.content}}</p>
 		<el-button type="primary" @click="goBack">返回</el-button>
 		<el-button type="warning" @click="deleteBlog">删除</el-button>
+		<el-button type="infor" @click="goAlter">修改</el-button>
 	</div>
 </template>
 
@@ -12,7 +13,7 @@
 		mounted() {
 			//console.log(this.$route.params.id)
 			this.blog = JSON.parse(window.localStorage.getItem('blogs'))[this.$route.params.id]
-			console.log(this.blog)
+			//console.log(this.blog)
 		},
 		data() {
 			return {
@@ -36,6 +37,10 @@
 				window.localStorage.setItem('blogs',JSON.stringify(blogs))
 				console.log(blogs)
 				this.$router.go(-1)
+			},
+			//去修改页面
+			goAlter(){
+				this.$router.push('/alterBlog/'+this.blogId)
 			}
 		}
 	}
